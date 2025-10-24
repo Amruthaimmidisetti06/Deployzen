@@ -1,0 +1,61 @@
+Create custom widgets for specific UI elements
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Custom Widget Example')),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomTextField(hintText: 'Enter your name'),
+              SizedBox(height: 15),
+              CustomTextField(hintText: 'Enter email'),
+              SizedBox(height: 15),
+              CustomTextField(hintText: 'Enter roll number'),
+              SizedBox(height: 25),
+              CustomButton(text: 'Submit'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Custom Text Field Widget
+class CustomTextField extends StatelessWidget {
+  final String hintText;
+  const CustomTextField({required this.hintText});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: hintText,
+        border: OutlineInputBorder(),
+      ),
+    );
+  }
+}
+
+// Custom Button Widget
+class CustomButton extends StatelessWidget {
+  final String text;
+  const CustomButton({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () => print('$text button pressed!'),
+      child: Text(text),
+    );
+  }
+}
