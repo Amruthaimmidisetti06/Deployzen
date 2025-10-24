@@ -1,0 +1,57 @@
+Design a responsive UI that adapts to different screen sizes. 
+
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Responsive UI Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: Scaffold(
+        appBar: AppBar(title: Text('Responsive UI Demo')),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            bool isNarrow = constraints.maxWidth < 600;
+            return Center(
+              child: isNarrow
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FlutterLogo(size: 100),
+                        SizedBox(height: 20),
+                        Text('Narrow Layout', style: TextStyle(fontSize: 24)),
+                        SizedBox(height: 20),
+                        ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Button'),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FlutterLogo(size: 100),
+                        SizedBox(width: 20),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Wide Layout', style: TextStyle(fontSize: 24)),
+                            SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text('Button'),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
