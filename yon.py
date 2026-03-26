@@ -1,38 +1,55 @@
+data("iris")
+summary(iris)
+boxplot(Sepal.Length ~ Species,
+        data = iris,
+        main = "Sepal Length by Species",
+        xlab = "Species",
+        ylab = "Sepal Length (cm)",
+        col = c("lightblue", "salmon", "lightgreen"),
+        border = "darkblue")
 
-import numpy as np
-from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras.datasets import boston_housing
-import matplotlib.pyplot as plt
+boxplot(Petal.Width ~ Species,
+        data = iris,
+        main = "Petal Width by Species",
+        xlab = "Species",
+        ylab = "Petal Width (cm)",
+        col = c("skyblue", "orange", "lightpink"),
+        border = "black")
 
-(x_train, y_train), (x_test, y_test) = boston_housing.load_data()
+palette <- rainbow(3)
 
-mean, std = x_train.mean(axis=0), x_train.std(axis=0)
-x_train = (x_train - mean) / std
-x_test = (x_test - mean) / std
+boxplot(Sepal.Width ~ Species,
+        data = iris,
+        main = "Sepal Width by Species",
+        col = palette,
+        xlab = "Species",
+        ylab = "Sepal Width (cm)")
 
-model = keras.Sequential([
-    keras.Input(shape=(x_train.shape[1],)),
-    layers.Dense(64, activation='relu'),
-    layers.Dense(64, activation='relu'),
-    layers.Dense(1)
-])
 
-model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 
-history = model.fit(x_train, y_train, epochs=100, batch_size=16,
-                    validation_split=0.2, verbose=1)
 
-loss, mae = model.evaluate(x_test, y_test)
-print("\nTest MAE:", mae)
 
-pred = model.predict(x_test)
-print("\nFirst 5 predictions:\n", pred[:5])
-print("\nActual values:\n", y_test[:5])
+data("airquality")
+summary(airquality)
+par(mfrow = c(2, 2))
+boxplot(airquality$Ozone,
+        main = "Ozone Concentration",
+        ylab = "Ozone (ppb)",
+        col = "lightblue")
 
-plt.plot(history.history['loss'], label='Train')
-plt.plot(history.history['val_loss'], label='Validation')
-plt.legend()
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.show()
+boxplot(airquality$Solar.R,
+        main = "Solar Radiation",
+        ylab = "Solar.R (lang)",
+        col = "lightgreen")
+
+boxplot(airquality$Wind,
+        main = "Wind Speed",
+        ylab = "Wind (mph)",
+        col = "lightyellow")
+
+boxplot(airquality$Temp,
+        main = "Temperature",
+        ylab = "Temperature (°F)",
+        col = "lightpink")
+
+par(mfrow = c(1, 1))
